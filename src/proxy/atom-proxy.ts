@@ -767,13 +767,8 @@ class AtomProxy {
 
   qualifiedName (noResname = false) {
     var name = ''
-    if (this.resname && !noResname) name += '[' + this.resname + ']'
-    if (this.resno !== undefined) name += this.resno
-    if (this.inscode) name += '^' + this.inscode
-    if (this.chainname) name += ':' + this.chainname
-    if (this.atomname) name += '.' + this.atomname
-    if (this.altloc) name += '%' + this.altloc
-    if (this.structure.modelStore.count > 1) name += '/' + this.modelIndex
+    name += this.index
+    name += '[' + this.element + ']'
     return name
   }
 
