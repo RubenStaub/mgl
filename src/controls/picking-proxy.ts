@@ -301,17 +301,23 @@ class PickingProxy {
     return this.type === type ? this.object : undefined
   }
 
+  _getPairDistance (pair: Object) {
+    const atom1 = pair.atom1
+    const atom2 = pair.atom2
+    return Math.sqrt((atom1.x - atom2.x)**2 + (atom1.y - atom2.y)**2 + (atom1.z - atom2.z)**2)
+  }
+
   getLabel () {
     const atom = this.atom || this.closeAtom
     let msg = 'nothing'
     if (this.arrow) {
       msg = this.arrow.name
     } else if (atom) {
-      msg = `atom: ${atom.qualifiedName()} (${atom.structure.name})`
+      msg = `atom: ${atom.qualifiedName()} (x: ${atom.x.toFixed(2)}, y: ${atom.y.toFixed(2)}, z: ${atom.z.toFixed(2)})`
     } else if (this.axes) {
       msg = 'axes'
     } else if (this.bond) {
-      msg = `bond: ${this.bond.atom1.qualifiedName()} - ${this.bond.atom2.qualifiedName()} (${this.bond.structure.name})`
+      msg = `bond: ${this.bond.atom1.qualifiedName()} - ${this.bond.atom2.qualifiedName()} (d = ${this._getPairDistance(this.bond).toFixed(2)} ang)`
     } else if (this.box) {
       msg = this.box.name
     } else if (this.cone) {
@@ -319,11 +325,11 @@ class PickingProxy {
     } else if (this.clash) {
       msg = `clash: ${this.clash.clash.sele1} - ${this.clash.clash.sele2}`
     } else if (this.contact) {
-      msg = `${this.contact.type}: ${this.contact.atom1.qualifiedName()} - ${this.contact.atom2.qualifiedName()} (${this.contact.atom1.structure.name})`
+      msg = `${this.contact.type}: ${this.contact.atom1.qualifiedName()} - ${this.contact.atom2.qualifiedName()} (d = ${this._getPairDistance(this.contact).toFixed(2)} ang)`
     } else if (this.cylinder) {
       msg = this.cylinder.name
     } else if (this.distance) {
-      msg = `distance: ${this.distance.atom1.qualifiedName()} - ${this.distance.atom2.qualifiedName()} (${this.distance.structure.name})`
+      msg = `distance: ${this.distance.atom1.qualifiedName()} - ${this.distance.atom2.qualifiedName()} (d = ${this._getPairDistance(this.distance).toFixed(2)} ang)`
     } else if (this.ellipsoid) {
       msg = this.ellipsoid.name
     } else if (this.octahedron) {
