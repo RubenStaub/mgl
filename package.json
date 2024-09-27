@@ -1,10 +1,10 @@
 {
-  "name": "ngl",
+  "name": "mgl",
   "version": "2.2.1",
   "description": "Scalable molecular graphics for the web",
-  "main": "dist/ngl.umd.js",
-  "module": "dist/ngl.esm.js",
-  "types": "dist/declarations/ngl.d.ts",
+  "main": "dist/mgl.umd.js",
+  "module": "dist/mgl.esm.js",
+  "types": "dist/declarations/mgl.d.ts",
   "scripts": {
     "lint": "npm run lint-src && npm run lint-test && npm run lint-script",
     "lint-src": "standard \"src/**/*.js\"",
